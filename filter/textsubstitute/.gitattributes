@@ -1,0 +1,2 @@
+# Ensure PHP files use LF line endings for Moodle code sniffer.
+*.php text eol=lf
