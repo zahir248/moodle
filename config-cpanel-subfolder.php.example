@@ -1,0 +1,39 @@
+<?php
+/**
+ * Moodle config.php template for cPanel subfolder deployment.
+ * Copy to config.php and replace placeholders with your cPanel details.
+ */
+
+unset($CFG);
+global $CFG;
+$CFG = new stdClass();
+
+//=========================================================================
+// DATABASE - from cPanel MySQL® Databases
+//=========================================================================
+$CFG->dbtype    = 'mysqli';
+$CFG->dblibrary = 'native';
+$CFG->dbhost    = 'localhost';
+$CFG->dbname    = 'CPANEL_DB_NAME';      // e.g. youruser_moodle
+$CFG->dbuser    = 'CPANEL_DB_USER';      // e.g. youruser_moodleuser
+$CFG->dbpass    = 'CPANEL_DB_PASSWORD';
+$CFG->prefix    = 'mdl_';
+$CFG->dboptions = array(
+  'dbpersist' => 0,
+  'dbport' => '',
+  'dbsocket' => '',
+  'dbcollation' => 'utf8mb4_unicode_ci',
+);
+
+//=========================================================================
+// SUBFOLDER - exact URL to your Moodle (no trailing slash)
+//=========================================================================
+$CFG->wwwroot   = 'https://yourdomain.com/moodle';
+
+// Data directory: OUTSIDE public_html, e.g. /home/cpanelusername/moodledata
+$CFG->dataroot  = '/home/CPANEL_USERNAME/moodledata';
+
+$CFG->admin     = 'admin';
+$CFG->directorypermissions = 0777;
+
+require_once(__DIR__ . '/lib/setup.php');
