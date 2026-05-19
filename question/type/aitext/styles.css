@@ -1,0 +1,59 @@
+
+.que.aitext textarea.qtype_aitext_response {
+    width: 100%;
+}
+
+.que.aitext textarea.qtype_aitext_response.qtype_aitext_plain {
+    white-space: pre-wrap;
+    font: inherit;
+}
+
+.que.aitext .qtext {
+    color: inherit;
+}
+.que.aitext .formulation .answer {
+    font-size: 16px;
+}
+.que.aitext .answer {
+    color: inherit;
+}
+
+.que.aitext textarea.qtype_aitext_response.qtype_aitext_monospaced {
+    white-space: pre;
+    font-family: Andale Mono, Monaco, Courier New, DejaVu Sans Mono, monospace;
+}
+
+.que.aitext .qtype_aitext_response {
+    min-height: 3em;
+}
+
+.que.aitext .qtype_aitext_response.readonly {
+    background-color: white;
+}
+
+.que.aitext div.qtype_aitext_response textarea {
+    width: 100%;
+}
+
+.que.aitext .ablock .filemanager .fp-restrictions {
+    margin-top: 1em;
+}
+.qtype_aitext_sampleanswereval {
+    font-size: 16px;
+    margin: 3px;
+    padding: 3px;
+    width: 100%;
+    max-width: 800px;
+    background-color: #ddd;
+}
+
+.qtype_aitext_spellcheck_wrong {
+    color: red;
+    text-decoration: line-through;
+    font-weight: 400;
+}
+
+.qtype_aitext_spellcheck_new {
+    color: green;
+    font-weight: 800;
+}

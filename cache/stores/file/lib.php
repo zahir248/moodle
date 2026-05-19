@@ -917,9 +917,19 @@ class cachestore_file extends store implements
         }
 
         // Finally rename the temp file to the desired file, returning the true|false result.
-        $result = rename($tempfile, $file);
-        @chmod($file, $this->cfg->filepermissions);
-        if (!$result) {
+        // On Windows, rename() can fail with "Access is denied" (e.g. antivirus, or target locked).
+        // Use copy + unlink as fallback so cache writes still succeed.
+        $result = @rename($tempfile, $file);
+        if (!$result && (PHP_OS_FAMILY === 'Windows' || strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')) {
+            if (@copy($tempfile, $file)) {
+                @chmod($file, $this->cfg->filepermissions);
+                @unlink($tempfile);
+                return true;
+            }
+        }
+        if ($result) {
+            @chmod($file, $this->cfg->filepermissions);
+        } else {
             // Failed to rename, don't leave files lying around.
             @unlink($tempfile);
         }

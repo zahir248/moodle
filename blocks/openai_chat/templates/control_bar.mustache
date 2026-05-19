@@ -1,0 +1,87 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_openai_chat/control_bar
+
+    This template renders the control_bar.
+
+    Example context (json):
+    {
+        "logging_enabled": boolean, true if logging is enabled in the plugin settings
+        "is_edit_mode": boolean; true if edit mode is active
+    }
+}}
+
+{{^is_edit_mode}}
+    {{#logging_enabled}}
+        <div title='{{#str}}loggingenabled, block_openai_chat{{/str}}' class='recording'></div>
+    {{/logging_enabled}}
+    <button 
+        class='openai_input_popout_btn btn btn-tertiary p-0 position-absolute top-0 end-0 z-2 mt-3 mr-3' 
+        aria-label="{{#str}}popout, block_openai_chat {{/str}}" 
+        title="{{#str}}popout, block_openai_chat {{/str}}" 
+        id="popout"
+    >
+        <i class="fa fa-arrow-up-right-from-square" aria-hidden="true"></i>
+    </button>
+{{/is_edit_mode}}
+<div class="d-flex gap-2 w-100" id="control_bar">
+    <div class="d-flex w-100">
+        <textarea 
+            class="w-100 form-control rounded-0 rounded-left"
+            aria-label="{{#str}}askaquestion, block_openai_chat{{/str}}" 
+            rows=1 
+            id="openai_input" 
+            placeholder="{{#str}}askaquestion, block_openai_chat{{/str}}" 
+            type="text" 
+            name="message"
+        ></textarea>
+        <button 
+            class='btn btn-primary rounded-0 rounded-right' 
+            title="{{#str}}askaquestion, block_openai_chat{{/str}}" 
+            aria-label="{{#str}}askaquestion, block_openai_chat{{/str}}" 
+            id="go"
+        >
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </button>
+    </div>
+    <button 
+        class='btn btn-secondary' 
+        title="{{#str}}new_chat, block_openai_chat {{/str}}" 
+        aria-label="{{#str}}new_chat, block_openai_chat {{/str}}" 
+        id="refresh"
+    >
+        <i class="fa fa-arrows-rotate" aria-hidden="true"></i>
+    </button>
+</div>
+
+<style>
+    {{#show_labels}}
+    .openai_message:before {
+        display: none;
+    }
+    .openai_message {
+        margin-bottom: 0.5rem;
+    }
+    {{/show_labels}}
+    .openai_message.user:before {
+        content: "{{user_name}}";
+    }
+    .openai_message.bot:before {
+        content: "{{assistant_name}}";
+    }
+</style>
